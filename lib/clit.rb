@@ -20,7 +20,9 @@ class Clit < BasicObject
 			raise ArgumentError, "#{name} already exists"
 		end
 
-		@themes[name] = ::Class.new(::Clit::Theme, &block).instance
+		@themes[name] = ::Class.new(::Clit::Theme, &block).instance.tap {|t|
+			t.instance_variable_set :@name, name
+		}
 	end
 
 	def self.theme (name)
@@ -35,8 +37,12 @@ class Clit < BasicObject
 		themes[name]
 	end
 
-	def initialize (name = :default)
-		theme(name)
+	def initialize (name = nil)
+		if ::ENV['CLIT_THEME']
+			theme ::ENV['CLIT_THEME'].to_sym
+		else
+			theme :compatible
+		end
 	end
 
 	def theme (name = nil)

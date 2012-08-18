@@ -10,27 +10,18 @@
 
 require 'singleton'
 require 'colorb'
+require 'terminfo'
 
 class Clit::Theme
 	include Singleton
 
+	attr_reader :name
+
 	def functions
-		methods - Object.instance_methods - [:functions]
+		methods - Object.instance_methods - [:functions, :name]
 	end
 
-	def log (text)
-		puts text
-	end
-
-	def info (text)
-		puts text
-	end
-
-	def warn (text)
-		puts text
-	end
-
-	def error (text)
-		$stderr.puts text
+	def new_line
+		print "\n"
 	end
 end

@@ -11,14 +11,26 @@
 
 Clit.define_theme :fancy do
 	def info (text)
-		super "#{?ℹ.blue} #{text}"
+		puts "#{?ℹ.blue} #{text}"
 	end
 
 	def warn (text)
-		super "#{?⚠.yellow} #{text}"
+		puts "#{?⚠.yellow} #{text}"
 	end
 
 	def error (text)
-		super "#{?✖.red} #{text}"
+		puts "#{?❗.red} #{text}"
+	end
+
+	def success (text)
+		puts "#{?✔.green} #{text}"
+	end
+
+	def failure (text)
+		puts "#{?✘.red} #{text}"
+	end
+
+	def separator
+		puts ('─' * TermInfo.screen_size[1]).black.bold
 	end
 end

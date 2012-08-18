@@ -10,14 +10,26 @@
 
 Clit.define_theme :compatible do
 	def info (text)
-		super "#{?i.blue} #{text}"
+		puts "#{?*.blue} #{text}"
 	end
 
 	def warn (text)
-		super "#{?!.yellow} #{text}"
+		puts "#{?*.yellow} #{text}"
 	end
 
 	def error (text)
-		super "#{?x.red} #{text}"
+		puts "#{?*.red} #{text}"
+	end
+
+	def success (text)
+		puts "#{?+.green} #{text}"
+	end
+
+	def failure (text)
+		puts "#{?-.red} #{text}"
+	end
+
+	def separator
+		puts ('-' * TermInfo.screen_size[1]).black.bold
 	end
 end
