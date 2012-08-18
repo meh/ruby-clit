@@ -1,0 +1,8 @@
+#! /usr/bin/env ruby
+require 'clit'
+
+cli.theme(ARGV.shift.to_sym) unless ARGV.empty?
+
+cli.theme.functions.each {|name|
+	cli.__send__ name, name, *(1.upto(cli.theme.method(name).arity - 1)).to_a
+}
