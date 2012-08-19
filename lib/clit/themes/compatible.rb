@@ -10,7 +10,7 @@
 
 Clit.define_theme :compatible do
 	def info (text)
-		puts "#{?*.blue} #{text}"
+		puts "#{?i.blue} #{text}"
 	end
 
 	def warn (text)
@@ -18,7 +18,7 @@ Clit.define_theme :compatible do
 	end
 
 	def error (text)
-		puts "#{?*.red} #{text}"
+		puts "#{?!.red} #{text}"
 	end
 
 	def success (text)
@@ -32,4 +32,67 @@ Clit.define_theme :compatible do
 	def separator
 		puts ('-' * TermInfo.screen_size[1]).black.bold
 	end
+	
+	def waiting (text)
+        puts "#{?~.white.bold} #{text}"
+	end
+
+    def in_frame(text, width=0)
+    
+      text.each_line { |line|
+        width = line.length if line.length >= width
+      }
+    
+      print "+"
+      (width+1).times { print "-" }
+      puts "+"  
+      text.each_line { |line| 
+      
+        print "| " + line.tr("\n","")
+        (width-line.tr("\n","").length).times { print " " }
+        print "|" 
+        puts
+      }
+      print "+"
+      (width+1).times { print "-" }
+      print "+"
+      puts
+      
+    end
+    
+    
+    def draw_line_after(text, width=0)
+      
+      text.each_line { |line|
+        width = line.length if line.length >= width
+      }
+      
+      puts text
+      (width+1).times do
+      print "-"
+      end
+      puts
+      
+    end
+    
+    def with_bullets(array)
+      array.each do |i|
+        puts "* " + i
+      end
+    end
+    
+    def tree_list(array)
+      puts "|"
+      (array.length-1).times do |i|
+        puts "+-- " + array[i]
+      end
+      puts "+-- " + array.last
+    end
+    
+    def with_arrows(hash)
+      hash.each do |key, value|
+        puts "#{key} -> #{value}"
+      end
+    end
+
 end
