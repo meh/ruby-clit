@@ -90,5 +90,30 @@ Clit.define_theme :compatible do
 			puts "#{key} -> #{value}"
 		}
 	end
+	
+	def split_view(text1, text2)
+		width = ( TermInfo.screen_size[1] / 2 ) - 2
+		string1_slices = text1.scan(/.{1,#{width}}/)
+		string2_slices = text2.scan(/.{1,#{width}}/)
+
+		if string1_slices.size > string2_slices.size
+			(string1_slices.size - string2_slices.size).times { string2_slices.push "" }
+		elsif string2_slices.size > string1_slices.size
+			(string2_slices.size - string1_slices.size).times { string1_slices.push "" }
+		end    
+
+		[string1_slices.size, string2_slices.size].max.times { |i| 
+		
+			print string1_slices[i]
+			(width - string1_slices[i].size).times {print " "} if (string1_slices[i].size < width)
+
+			print "  |  "
+
+			print string2_slices[i]
+			(width - string1_slices[i].size).times {print " "} if (string2_slices[i].size < width)
+
+			puts
+		}
+	end
 
 end
